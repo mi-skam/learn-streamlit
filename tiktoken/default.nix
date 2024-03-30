@@ -17,7 +17,7 @@
 let
   pname = "tiktoken";
   version = "0.6.0";
-  src = fetchPypi {
+  src = pkgs.fetchPypi {
     inherit pname version;
     hash = "sha256-J+dzVkIyAE9PgQ/R+FI2Zz7DpW7X8SBvye2GcOvtuXo=";
   };
