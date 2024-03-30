@@ -6,7 +6,7 @@ let
     inherit pname version;
     hash = "sha256-J+dzVkIyAE9PgQ/R+FI2Zz7DpW7X8SBvye2GcOvtuXo=";
   };
-  '';
+
 in
 pkgs.python3Packages.buildPythonPackage {
   inherit pname version src postPatch;
@@ -24,16 +24,16 @@ pkgs.python3Packages.buildPythonPackage {
     hash = "sha256-Q7XO+auj4tKDAGbqNn9pmJg8EJvooN2ie0lWwZVrld4=";
   };
 
-  nativeBuildInputs = [
+  nativeBuildInputs = with pkgs; [
     rustPlatform.cargoSetupHook
     setuptools-rust
     cargo
     rustc
   ];
 
-  buildInputs = lib.optionals stdenv.isDarwin [ libiconv ];
+  buildInputs = pkgs.lib.optionals pkgs.stdenv.isDarwin [ pkgs.libiconv ];
 
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with pkgs.python3Packages; [
     requests
     regex
     blobfile
@@ -46,7 +46,7 @@ pkgs.python3Packages.buildPythonPackage {
     "tiktoken"
   ];
 
-  meta = with lib; {
+  meta = with pkgs.lib; {
     description = "tiktoken is a fast BPE tokeniser for use with OpenAI's models.";
     homepage = "https://github.com/openai/tiktoken";
     license = licenses.mit;

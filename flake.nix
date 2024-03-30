@@ -10,7 +10,8 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        _langchain-openai = import ./langchain-openai { inherit pkgs; };
+        _tiktoken = import ./tiktoken { inherit pkgs; };
+        _langchain-openai = import ./langchain-openai { inherit pkgs _tiktoken; };
         pythonEnv = pkgs.python3.withPackages (ps:
           with ps;
           [

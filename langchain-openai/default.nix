@@ -1,8 +1,10 @@
-{ pkgs }:
+{ pkgs
+, _tiktoken
+}:
 
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "langchain-openai";
-  version = "0.0.7";
+  version = "0.1.1";
   pyproject = true;
 
   src = pkgs.fetchPypi {
@@ -18,7 +20,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   propagatedBuildInputs = with pkgs.python3Packages; [
     langchain-core
     openai
-    tiktoken
+    _tiktoken
   ];
 
   # PyPI source does not have tests
