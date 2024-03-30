@@ -1,19 +1,4 @@
-{ lib
-, stdenv
-, buildPythonPackage
-, fetchPypi
-, pythonOlder
-, rustPlatform
-, cargo
-, rustc
-, setuptools
-, setuptools-rust
-, wheel
-, libiconv
-, requests
-, regex
-, blobfile
-}:
+{ pkgs }:
 let
   pname = "tiktoken";
   version = "0.6.0";
@@ -21,17 +6,13 @@ let
     inherit pname version;
     hash = "sha256-J+dzVkIyAE9PgQ/R+FI2Zz7DpW7X8SBvye2GcOvtuXo=";
   };
-  postPatch = ''
-    cp ${./Cargo.lock} Cargo.lock
   '';
 in
-buildPythonPackage {
+pkgs.python3Packages.buildPythonPackage {
   inherit pname version src postPatch;
   format = "pyproject";
 
-  disabled = pythonOlder "3.8";
-
-  nativeBuildInput = [
+  nativeBuildInput = with pkgs.python3Packages; [
     setuptools
     setuptools-rust
     wheel
