@@ -4,6 +4,8 @@ import streamlit as st
 from langchain import PromptTemplate
 from langchain_community.llms import OpenAI
 
+# browser window title
+st.set_page_config(page_title="Zaitz: blog outline generator")
 # app title
 st.title("Zaitz: blog outline generator 🎨🤖")
 
