@@ -15,8 +15,10 @@ pkgs.python3Packages.buildPythonPackage rec {
     pkgs.python3Packages.poetry-core
   ];
 
-  propagatedBuildInputs = [
-    pkgs.python3Packages.langchain-core
+  propagatedBuildInputs = with pkgs.python3Packages; [
+    langchain-core
+    openai
+    tiktoken
   ];
 
   # PyPI source does not have tests
