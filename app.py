@@ -5,7 +5,7 @@ from langchain import PromptTemplate
 from langchain_community.llms import OpenAI
 
 # app title
-st.title("Zaitz 🎨🤖")
+st.title("Zaitz: blog outline generator 🎨🤖")
 
 # gets the user's input in a side panel and saves it in openai_api_key
 openai_api_key = st.sidebar.text_input("OpenAI API Key")
