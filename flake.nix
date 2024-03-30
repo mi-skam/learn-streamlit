@@ -18,7 +18,6 @@
             streamlit
             openai
             langchain
-            langchain-community
             langchain-openai
             python-dotenv
           ]);
