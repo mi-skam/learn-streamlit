@@ -10,6 +10,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        _langchain-openai = pkgs.callPackage ./langchain-openai { };
         pythonEnv = pkgs.python3.withPackages (ps:
           with ps;
           [
@@ -18,7 +19,7 @@
             streamlit
             openai
             langchain
-            langchain-openai
+            _langchain-openai
             python-dotenv
           ]);
       in {
