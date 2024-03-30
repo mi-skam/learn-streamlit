@@ -12,7 +12,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
         
       in {
-        devShells.default =  (pkgs.buildFHSUserEnv {
+        devShells.default = (pkgs.buildFHSUserEnv {
           name = "streamlit-env";
           targetPkgs = pkgs: (with pkgs; [
             python312
