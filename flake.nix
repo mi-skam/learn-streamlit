@@ -17,6 +17,7 @@
             streamlit
             openai
             langchain
+            langchain-community
           ]);
       in {
         devShells.default = pkgs.mkShell {
