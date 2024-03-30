@@ -1,13 +1,12 @@
 { pkgs }:
 
 pkgs.python3Packages.buildPythonPackage rec {
-  pname = "langchain-text-splitters";
+  pname = "langchain-openai";
   version = "0.1.1";
   pyproject = true;
 
   src = pkgs.fetchPypi {
-    pname = "langchain-openai";
-    inherit version;
+    inherit pname version;
     hash = "sha256-rEWfqYeZ9RF61UJakzCyGWEyHjC8GaKi+fdh3a3WKqE=";
   };
 
