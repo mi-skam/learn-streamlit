@@ -2,7 +2,7 @@
 # langchain, a framework for working with LLM models.
 import streamlit as st
 from langchain_core.prompts import PromptTemplate
-from langchain_community.llms import OpenAI
+from langchain_openai import OpenAI
 
 from dotenv import load_dotenv
 import os
