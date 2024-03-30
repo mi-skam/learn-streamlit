@@ -9,7 +9,7 @@ let
 
 in
 pkgs.python3Packages.buildPythonPackage {
-  inherit pname version src postPatch;
+  inherit pname version src;
   format = "pyproject";
 
   nativeBuildInput = with pkgs.python3Packages; [
@@ -19,7 +19,7 @@ pkgs.python3Packages.buildPythonPackage {
   ];
 
   cargoDeps = rustPlatform.fetchCargoTarball {
-    inherit src postPatch;
+    inherit src;
     name = "${pname}-${version}";
     hash = "sha256-Q7XO+auj4tKDAGbqNn9pmJg8EJvooN2ie0lWwZVrld4=";
   };
