@@ -15,6 +15,7 @@ openai_api_key = st.sidebar.text_input("OpenAI API Key")
 
 # gets a user's input, sends it to the llm and prints the response in a info box
 def generate_response(input_text):
+    print(openai_api_key)
     llm = OpenAI(
         model_name="gpt-3.5-turbo", temperature=0.7, openai_api_key=openai_api_key
     )
