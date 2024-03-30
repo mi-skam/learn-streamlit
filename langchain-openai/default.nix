@@ -1,31 +1,22 @@
-{ lib
-, buildPythonPackage
-, fetchPypi
-, poetry-core
-, langchain-core
-, lxml
-, pythonOlder
-}:
+{ pkgs }:
 
-buildPythonPackage rec {
+pkgs.python3.buildPythonPackage rec {
   pname = "langchain-text-splitters";
   version = "0.1.1";
   pyproject = true;
 
-  disabled = pythonOlder "3.11";
-
-  src = fetchPypi {
+  src = pkgs.fetchPypi {
     pname = "langchain-openai";
     inherit version;
     hash = "sha256-rEWfqYeZ9RF61UJakzCyGWEyHjC8GaKi+fdh3a3WKqE=";
   };
 
   nativeBuildInputs = [
-    poetry-core
+    pkgs.poetry-core
   ];
 
   propagatedBuildInputs = [
-    langchain-core
+    pkgs.langchain-core
   ];
 
   # PyPI source does not have tests
@@ -35,7 +26,7 @@ buildPythonPackage rec {
     "langchain_openai"
   ];
 
-  meta = with lib; {
+  meta = with pkgs.lib; {
     description = "This package contains the LangChain integrations for OpenAI through their openai SDK.";
     homepage = "https://github.com/langchain-ai/langchain";
     license = licenses.mit;
