@@ -19,9 +19,10 @@ st.title("Zaitz: blog outline generator 🎨🤖")
 
 # gets a user's input, sends it to the llm and prints the response in a info box
 def generate_response(input_text):
-    print(openai_api_key)
     llm = OpenAI(
-        model_name="gpt-3.5-turbo", temperature=0.7, openai_api_key=openai_api_key
+        model_name="gpt-3.5-turbo-instruct",
+        temperature=0.7,
+        openai_api_key=openai_api_key,
     )
     topic = input_text
     template = "As an experienced data scientist and technical writer, generate an outline for a blog about {topic}."
