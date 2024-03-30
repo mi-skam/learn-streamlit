@@ -6,7 +6,8 @@ pkgs.python3Packages.buildPythonPackage rec {
   pyproject = true;
 
   src = pkgs.fetchPypi {
-    inherit pname version;
+    pname = "langchain_openai";
+    inherit version;
     hash = "sha256-rEWfqYeZ9RF61UJakzCyGWEyHjC8GaKi+fdh3a3WKqE=";
   };
 
