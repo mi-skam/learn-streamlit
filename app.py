@@ -4,13 +4,17 @@ import streamlit as st
 from langchain_core.prompts import PromptTemplate
 from langchain_community.llms import OpenAI
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+openai_api_key = os.getenv("OPENAI_API_KEY")
+
 # browser window title
 st.set_page_config(page_title="Zaitz: blog outline generator")
 # app title
 st.title("Zaitz: blog outline generator 🎨🤖")
-
-# gets the user's input in a side panel and saves it in openai_api_key
-openai_api_key = st.sidebar.text_input("OpenAI API Key")
 
 
 # gets a user's input, sends it to the llm and prints the response in a info box

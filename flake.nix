@@ -19,6 +19,7 @@
             openai
             langchain
             langchain-community
+            python-dotenv
           ]);
       in {
         devShells.default = pkgs.mkShell {
