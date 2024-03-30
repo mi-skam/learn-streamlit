@@ -2,13 +2,13 @@
 
 pkgs.python3Packages.buildPythonPackage rec {
   pname = "langchain-openai";
-  version = "0.1.1";
+  version = "0.0.8";
   pyproject = true;
 
   src = pkgs.fetchPypi {
     pname = "langchain_openai";
     inherit version;
-    hash = "sha256-0Q6an8TI6pnKmPI4CM5Ex9zdZTVKwHrRCv6HTs80Aco=";
+    hash = "sha256-t6un/MUjBeeLCBl+vFT8RcwG28QLpbkTvEiiKzCk9ck=";
   };
 
   nativeBuildInputs = [
