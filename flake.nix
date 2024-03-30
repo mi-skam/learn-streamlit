@@ -14,6 +14,7 @@
           with ps;
           [
             # Add Python packages here
+            pip
             streamlit
             openai
             langchain
