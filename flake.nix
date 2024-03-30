@@ -10,23 +10,15 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        pythonEnv = pkgs.python3.withPackages (ps:
-          with ps;
-          [
-            # Add Python packages here
-            pip
-            streamlit
-            openai
-            langchain
-            langchain-community
-            python-dotenv
-          ]);
+        
       in {
-        devShells.default = pkgs.mkShell {
-          buildInputs = [
-            pythonEnv
-            # Add other build inputs if necessary
-          ];
-        };
+        devShells.default =  (pkgs.buildFHSUserEnv {
+          name = "streamlit-env";
+          targetPkgs = pkgs: (with pkgs; [
+            python312
+            python312Packages.pip
+            python312Packages.virtualenv
+          ]);
+        }).env;
       });
 }
