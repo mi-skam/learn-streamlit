@@ -8,7 +8,7 @@ pkgs.python3Packages.buildPythonPackage rec {
   src = pkgs.fetchPypi {
     pname = "langchain_openai";
     inherit version;
-    hash = "sha256-rEWfqYeZ9RF61UJakzCyGWEyHjC8GaKi+fdh3a3WKqE=";
+    hash = "sha256-0Q6an8TI6pnKmPI4CM5Ex9zdZTVKwHrRCv6HTs80Aco=";
   };
 
   nativeBuildInputs = [
