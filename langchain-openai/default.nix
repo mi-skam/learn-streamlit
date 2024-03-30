@@ -1,6 +1,6 @@
 { pkgs }:
 
-pkgs.python3.buildPythonPackage rec {
+pkgs.python3Packages.buildPythonPackage rec {
   pname = "langchain-text-splitters";
   version = "0.1.1";
   pyproject = true;
@@ -12,11 +12,11 @@ pkgs.python3.buildPythonPackage rec {
   };
 
   nativeBuildInputs = [
-    pkgs.poetry-core
+    pkgs.python3Packages.poetry-core
   ];
 
   propagatedBuildInputs = [
-    pkgs.langchain-core
+    pkgs.python3Packages.langchain-core
   ];
 
   # PyPI source does not have tests
