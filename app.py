@@ -37,3 +37,14 @@ def openai_image(prompt):
 
 
 format_type = st.sidebar.selectbox("Choose your AI", ["ChatGPT", "DALL-E 2"])
+
+if format_type == "ChatGPT":
+    input_text = st.text_area("Prompt", height=50)
+    chat_button = st.button("Send")
+
+    if chat_button and input_text.strip() != "":
+        with st.spinner("Loading..."):
+            openai_answer = openai_completion(input_text)
+            st.success(openai_answer)
+    else:
+        st.warning("Please enter something.")
