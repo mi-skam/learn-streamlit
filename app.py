@@ -1,33 +1,61 @@
 # streamlit, a low-code framework used for the front end to let users interact with the app.
 # langchain, a framework for working with LLM models.
+import os
 import streamlit as st
-from langchain_community.llms import OpenAI
+from openai import OpenAI
+from dotenv import load_dotenv
 
-# app title
-st.title("Zaitz 🎨🤖")
-
-# gets the user's input in a side panel and saves it in openai_api_key
-openai_api_key = st.sidebar.text_input("OpenAI API Key")
-
-
-# gets a user's input, sends it to the llm and prints the response in a info box
-def generate_response(input_text):
-    llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-    st.info(llm(input_text))
+# load OpenAI key
+load_dotenv()
+try:
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+except Exception:
+    # gets the user's input in a side panel and saves it in openai_api_key
+    openai_api_key = st.sidebar.text_input("OpenAI API Key")
+    client = OpenAI(api_key=openai_api_key)
 
 
-# this context creates a form
-with st.form("my_form"):
-    # this creates a text area with a placeholder text
-    text = st.text_area(
-        "Enter text:",
-        "How can I create my own LLM frontends, robots and more? I want to use OpenAI, Streamlit and LangChain?",
+@st.cache_data(
+    persist=True,
+    show_spinner=False,
+)
+def openai_completion(prompt):
+    completion = client.completions.create(
+        model="gpt-3.5-turbo-instruct", prompt=prompt, max_tokens=150, temperature=0.5
     )
-    # creates a handler for the submit button, returns True if the button was clicked
-    submitted = st.form_submit_button("Submit")
-    # check for wrong key format
-    if not openai_api_key.startswith("sk-"):
-        st.warning("Please enter your OpenAI API key!", icon="⚠")
-    # runs generate_response with the input as arguments
-    if submitted and openai_api_key.startswith("sk-"):
-        generate_response(text)
+    return completion.choices[0].text
+
+
+@st.cache_data(
+    persist=True,
+    show_spinner=False,
+)
+def openai_image(prompt):
+    image = client.images.generate(prompt=prompt, n=1, size="512x512")
+    image_url = image.data[0].url
+    return image_url
+
+
+format_type = st.sidebar.selectbox("Choose your AI", ["ChatGPT", "DALL-E 2"])
+
+if format_type == "ChatGPT":
+    input_text = st.text_area("Prompt", height=50)
+    chat_button = st.button("Chat")
+
+    if chat_button and input_text.strip() != "":
+        with st.spinner("Loading..."):
+            openai_answer = openai_completion(input_text)
+            st.success(openai_answer)
+    else:
+        st.warning("Please enter something.")
+
+elif format_type == "DALL-E 2":
+    input_text = st.text_area("Prompt", height=50)
+    image_button = st.button("Generate Image")
+
+    if image_button and input_text.strip() != "":
+        with st.spinner("Loading..."):
+            image_url = openai_image(input_text)
+            st.image(image_url)
+    else:
+        st.warning("Please enter something")
