@@ -15,6 +15,7 @@
         devShells.default = (pkgs.buildFHSUserEnv {
           name = "streamlit-env";
           targetPkgs = pkgs: (with pkgs; [
+            pandoc
             python312
             python312Packages.pip
             python312Packages.virtualenv
