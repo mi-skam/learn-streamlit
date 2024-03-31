@@ -19,7 +19,7 @@ st.set_page_config(page_title="ChatGPT + DALL-E 2")
 )
 def openai_completion(prompt):
     completion = openai.completions.create(
-        model="gpt-3.5-turbo-0125", prompt=prompt, max_tokens=150, temperature=0.5
+        model="gpt-3.5-turbo-instruct", prompt=prompt, max_tokens=150, temperature=0.5
     )
     return completion.choices[0].text
 
