@@ -1,12 +1,12 @@
 import os
-import openai
 import streamlit as st
-from PIL import Image
 from dotenv import load_dotenv
+from openai import OpenAI
+from PIL import Image
 
 # load OpenAI key
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 st.set_page_config(page_title="ChatGPT + DALL-E 2")
 
@@ -18,7 +18,7 @@ st.set_page_config(page_title="ChatGPT + DALL-E 2")
     suppress_st_warning=True,
 )
 def openai_completion(prompt):
-    response = openai.Completion.create(
+    response = openai.completions.create(
         model="text-davinci-003", prompt=prompt, max_tokens=150, temperature=0.5
     )
     return response["choices"][0]["text"]
