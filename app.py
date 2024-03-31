@@ -18,10 +18,10 @@ st.set_page_config(page_title="ChatGPT + DALL-E 2")
     suppress_st_warning=True,
 )
 def openai_completion(prompt):
-    response = openai.completions.create(
+    completion = openai.completions.create(
         model="text-davinci-003", prompt=prompt, max_tokens=150, temperature=0.5
     )
-    return response["choices"][0]["text"]
+    return completion.choices[0].text
 
 
 @st.cache(
