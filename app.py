@@ -1,33 +1,41 @@
-# streamlit, a low-code framework used for the front end to let users interact with the app.
-# langchain, a framework for working with LLM models.
+import os
+import openai
 import streamlit as st
+from PIL import Image
+from dotenv import load_dotenv
+
+# load OpenAI key
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+st.set_page_config(page_title="ChatGPT + DALL-E 2")
 
 
-# app title
-st.title("Zaitz 🎨🤖")
-
-# gets the user's input in a side panel and saves it in openai_api_key
-openai_api_key = st.sidebar.text_input("OpenAI API Key")
-
-
-# gets a user's input, sends it to the llm and prints the response in a info box
-def generate_response(input_text):
-    llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-    st.info(llm(input_text))
-
-
-# this context creates a form
-with st.form("my_form"):
-    # this creates a text area with a placeholder text
-    text = st.text_area(
-        "Enter text:",
-        "How can I create my own LLM frontends, robots and more? I want to use OpenAI, Streamlit and LangChain?",
+@st.cache(
+    persist=True,
+    allow_output_mutation=True,
+    show_spinner=False,
+    suppress_st_warning=True,
+)
+def openai_completion(prompt):
+    response = openai.Completion.create(
+        model="text-davinci-003", prompt=prompt, max_tokens=150, temperature=0.5
     )
-    # creates a handler for the submit button, returns True if the button was clicked
-    submitted = st.form_submit_button("Submit")
-    # check for wrong key format
-    if not openai_api_key.startswith("sk-"):
-        st.warning("Please enter your OpenAI API key!", icon="⚠")
-    # runs generate_response with the input as arguments
-    if submitted and openai_api_key.startswith("sk-"):
-        generate_response(text)
+    return response["choices"][0]["text"]
+
+
+@st.cache(
+    persist=True,
+    allow_output_mutation=True,
+    show_spinner=False,
+    suppress_st_warning=True,
+)
+def openai_image(prompt):
+    response = openai.Image.create(prompt=prompt, n=1, size="256x256")
+    image_url = response["data"][0]["url"]
+    return image_url
+
+
+format_type = st.sidebar.selectbox(
+    "Choose your OpenAI magician 😉", ["ChatGPT", "DALL-E 2"]
+)
