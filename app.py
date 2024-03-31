@@ -36,6 +36,4 @@ def openai_image(prompt):
     return image_url
 
 
-format_type = st.sidebar.selectbox(
-    "Choose your OpenAI magician 😉", ["ChatGPT", "DALL-E 2"]
-)
+format_type = st.sidebar.selectbox("Choose your AI", ["ChatGPT", "DALL-E 2"])
