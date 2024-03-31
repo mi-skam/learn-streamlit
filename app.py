@@ -1,7 +1,7 @@
 # streamlit, a low-code framework used for the front end to let users interact with the app.
 # langchain, a framework for working with LLM models.
 import streamlit as st
-from langchain_community.llms import OpenAI
+
 
 # app title
 st.title("Zaitz 🎨🤖")
