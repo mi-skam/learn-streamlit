@@ -4,9 +4,9 @@ title: learn-streamlit
 date: March 31, 2024
 ---
 
-# Hi
+First step:
 
-Slide 1
+1 - hello openai.py
 
 ---
 
