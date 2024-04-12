@@ -89,4 +89,4 @@ Windows:
 $Env:OPENAI_API_KEY="sk..." # change it with your key
 ```
 
-To run streamlit apps, you enter `streamlit run <app_name> (e.g. "1 - hello openai.py")
+To run streamlit apps, you enter `streamlit run <app_name> (e.g. "1 - hello openai.py")`
