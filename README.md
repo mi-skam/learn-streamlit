@@ -1,3 +1,7 @@
+UPDATE: 16.04.27: Starting the [30 days of streamlit challenge
+](https://30days.streamlit.app/).
+Beginning with [30days/Day01](30days/Day01/README.md)
+
 # Learn to use streamlit for building custom LLM interfaces
 
 ## Getting started
